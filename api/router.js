@@ -5,6 +5,7 @@ import auth from './auth/router.js'
 // import articles from './articles/router.js'
 
 const router = express.Router()
+
 router.use('/users', users)
 router.use('/', auth)
 // router.use('/articles', articles)

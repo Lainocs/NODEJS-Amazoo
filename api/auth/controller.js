@@ -21,7 +21,7 @@ const register = (req, res) => {
         user.password = hash
         database.query('INSERT INTO users SET ?', user, (err, result) => {
           if (err) throw err
-          res.send(result)
+          login(req, res)
         })
       })
     }
@@ -29,7 +29,13 @@ const register = (req, res) => {
 }
 
 const login = (req, res) => {
-  const user = req.body
+  const user = new User(
+    req.body.name,
+    req.body.email,
+    req.body.password,
+    req.body.age,
+    req.body.city
+  )
 
   database.query('SELECT * FROM users WHERE email = ?', user.email, (err, result) => {
     if (err) throw err

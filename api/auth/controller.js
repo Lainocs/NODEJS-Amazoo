@@ -1,8 +1,15 @@
 import database from '../../database.js'
 import bcrypt from 'bcrypt'
+import User from '../users/model.js'
 
 const register = (req, res) => {
-  const user = req.body
+  const user = new User(
+    req.body.name,
+    req.body.email,
+    req.body.password,
+    req.body.age,
+    req.body.city
+  )
 
   database.query('SELECT * FROM users WHERE email = ?', user.email, (err, result) => {
     if (err) throw err

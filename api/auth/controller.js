@@ -1,7 +1,6 @@
 import database from '../../database.js'
 import bcrypt from 'bcrypt'
 import User from '../users/model.js'
-import session from 'express-session'
 
 const register = (req, res) => {
   const user = new User(

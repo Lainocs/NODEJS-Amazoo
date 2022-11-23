@@ -1,6 +1,7 @@
 import database from '../../database.js'
 import bcrypt from 'bcrypt'
 import User from '../users/model.js'
+import session from 'express-session'
 
 const register = (req, res) => {
   const user = new User(
@@ -43,7 +44,8 @@ const login = (req, res) => {
       bcrypt.compare(user.password, result[0].password, (err, response) => {
         if (err) throw err
         if (response) {
-          res.send("Login successful")
+          req.session.user = result[0]
+          res.send(req.session.user)
         } else {
           res.send("Wrong password")
         }
@@ -53,6 +55,7 @@ const login = (req, res) => {
     }
   })
 }
+
 
 export default {
   register,
